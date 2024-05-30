@@ -7,13 +7,13 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 To install the project dependencies, follow these steps:
 
 1. Clone this repository:
-   git clone https://github.com/your-username/FirstProject.git
+   `git clone https://github.com/your-username/FirstProject.git`
 
 2. Navigate into the project directory:
-   cd FirstProject
+   `cd FirstProject`
    
 3. Install the dependencies with npm:
-   npm install
+   `npm install`
 
 ## Development server
 
