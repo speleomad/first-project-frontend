@@ -1,6 +1,6 @@
 # FirstProject
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.9 and use node v18.4.0 (link : https://nodejs.org/dist/v18.14.0/node-v18.14.0-x64.msi)
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.9 and uses node [v18.4.0](https://nodejs.org/dist/v18.14.0/node-v18.14.0-x64.msi)
 
 ## Installation
 
