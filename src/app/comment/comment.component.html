@@ -1,0 +1,43 @@
+<div *ngIf="commentList.length>0;else noComments">
+    <h3>Messages</h3>
+    <ul class="list-group ">
+        <ng-container
+            *ngFor="let comment of commentList; let i=index; let isFirst=first;let isEven=even,let isOdd=odd">
+           
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <!-- {{comment.message |getChar:2}} -->
+                {{comment.message}}
+                <span class="badge  badge-pill"
+                [ngClass]="{'badge-danger':isOdd,'badge-success':isEven}">
+                {{comment.date | date:'y MMM EEEE d - HH:mm:ss'|uppercase}} </span>
+            </li>
+            <!--ngClass-->
+           <!--
+            <li class="list-group-item d-flex justify-content-between align-items-center"
+                [ngClass]="{'impair':isOdd,'text-success bg-light':isEven}">
+                #{{i}}-{{isFirst}} {{comment.message}}
+                <span class="badge badge-secondary badge-pill">{{comment.date | date:'HH:mm:ss'}} </span>
+            </li>
+           -->
+            <!--ngStyle-->
+            <!--
+            <li *ngIf="isEven" class="list-group-item d-flex justify-content-between align-items-center"
+                [ngStyle]="{color:colors.even}" >
+                #{{i}}-{{isFirst}} {{comment.message}} 
+                <span class="badge badge-secondary badge-pill">{{comment.date | date:'HH:mm:ss'}} </span>
+            </li>
+            <li *ngIf="isOdd" class="list-group-item d-flex justify-content-between align-items-center"
+                [ngStyle]="{color:colors.odd}" >
+                #{{i}}-{{isFirst}} {{comment.message}} 
+                <span class="badge badge-secondary badge-pill">{{comment.date | date:'HH:mm:ss'}} </span>
+            </li>-->
+        </ng-container>
+
+    </ul>
+
+</div>
+<ng-template #noComments>
+    <div>
+        <p>No comments</p>
+    </div>
+</ng-template>

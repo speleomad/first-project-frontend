@@ -1,0 +1,26 @@
+<div class="container">
+    <div class="card border-primary">
+        <div class="card-header bg-primary text-white">
+            About Component
+        </div>
+        <div class="card-body">
+            <ul>
+                <li>Name: {{info.name}}</li>
+                <li>Email: {{info.email}}</li>
+                <li>Tel: {{info.tel}}</li>
+            </ul>
+
+            <div class="form-group">
+                <label for="">Message</label>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Your message" [(ngModel)]="comment.message">
+                </div>
+
+                <button class="btn btn-primary" (click)="addComment()" [disabled]="newComment">Add Comment</button>
+            </div>
+            <app-comment [commentList]="comments"></app-comment>
+           
+        </div>
+
+    </div>
+</div>
