@@ -2,6 +2,19 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.9 and use node v18.4.0 (link : https://nodejs.org/dist/v18.14.0/node-v18.14.0-x64.msi)
 
+## Installation
+
+To install the project dependencies, follow these steps:
+
+1. Clone this repository:
+   git clone https://github.com/your-username/FirstProject.git
+
+2. Navigate into the project directory:
+   cd FirstProject
+   
+3. Install the dependencies with npm:
+   npm install
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
