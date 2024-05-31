@@ -1,1 +1,36 @@
-<p>contacts works!</p>
+<div class="card border-primary">
+    <div class="card-header bg-primary text-white">
+        Contacts Component
+    </div>
+    <div class="card-body">
+        <div *ngIf="contacts.length>0;else noContacts">
+            <h3>Contact List</h3>
+            <table class="table table-hover">
+                <thead>
+                    <th scope="col">Name</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let contact of contacts">
+                        <td>{{contact.name}}</td>
+                        <td><a routerLink="/contacts/{{contact.id}}" class="btn btn-success">Detail</a></td>
+                        <td><a class="btn btn-danger" (click)="onDelete(contact.id)">Delete</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <ng-template #noContacts>
+           <p class="alert alert-warning">
+            No contact found!
+           </p>
+        </ng-template>
+
+    </div>
+
+</div>
+
+
+<button class="btn btn-primary mt-5" (click)="onAbout()">
+    Go to about
+</button>
