@@ -7,11 +7,14 @@ import { SigninComponent } from './signin/signin.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { ContactDetailComponent } from './contact-detail/contact-detail.component';
 import { authGuard } from './guards/auth.guard';
+import { EditContactComponent } from './edit-contact/edit-contact.component';
+
 
 const routes: Routes = [
   { path: '',canActivate:[authGuard], component: HomeComponent,pathMatch:'full' },
   { path: 'about',canActivate:[authGuard], component: AboutComponent },
   { path: 'contacts',canActivate:[authGuard], component: ContactsComponent },
+  { path: 'contacts/edit',canActivate:[authGuard], component:EditContactComponent },
   { path: 'contacts/:id',canActivate:[authGuard], component: ContactDetailComponent },
   { path: 'signin', component: SigninComponent },
   { path: '**', component: NotFoundComponent }

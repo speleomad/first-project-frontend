@@ -14,7 +14,13 @@ export class ContactsComponent implements OnInit{
   contacts:Contact[]=[]
   constructor(private router:Router,private contactService:ContactService){}
   ngOnInit(): void {
-   this.contacts=this.contactService.getContacts();
+  // this.contacts=this.contactService.getContacts();
+   //Observer
+  this.contactService.getContacts().subscribe(
+    {
+      next:(contacts:Contact[])=>{this.contacts=contacts}
+    }
+  )
   }
   onDelete(id:number){
     
@@ -25,5 +31,8 @@ export class ContactsComponent implements OnInit{
   //  window.location.href = 'https://www.google.tn/maps/@34.6113892,8.7590835,6z?hl=fr';
     this.router.navigate(['/about']);
   //this.router.navigateByUrl('/about?name=demo');
+  }
+  onAddContact(){
+    this.router.navigateByUrl('/contacts/edit')
   }
 }

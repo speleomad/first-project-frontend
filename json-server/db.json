@@ -1,0 +1,89 @@
+{
+  "contacts": [
+    {
+      "id": 1,
+      "name": "Doug Cutting",
+      "email": "doug.cutting@cloudera.com",
+      "website": "http://hadoop.apache.org/",
+      "projects": [
+        "Nuch",
+        "Hadoop"
+      ],
+      "image": "./assets/images/doug_cutting.jpg",
+      "featured": true
+    },
+    {
+      "id": 2,
+      "name": "Bill Gates",
+      "email": "bill.gatesg@outlook.com",
+      "website": "https://www.gatesnotes.com/",
+      "projects": [
+        "Microsoft",
+        "Windows"
+      ],
+      "image": "images/bill_gates.jpg",
+      "featured": false
+    },
+    {
+      "id": 3,
+      "name": "Mark Zuckerberg",
+      "email": "bill.gatesg@facebook.com",
+      "website": "https://www.mark-zuckerberg.com/",
+      "projects": [
+        "Facebook",
+        "Instagram"
+      ],
+      "image": "images/mark_zuckerberg.jpg",
+      "featured": false
+    },
+    {
+      "id": -1,
+      "name": "Demo1",
+      "email": "demo1@cloudera.com",
+      "website": "http://monsite.com/",
+      "projects": [
+        "Nuch",
+        "Hadoop"
+      ],
+      "image": "images/default-avatar.jpg",
+      "featured": false
+    },
+    {
+      "name": "Demo2",
+      "email": "demo2@cloudera.com",
+      "website": "http://monsite.com/",
+      "projects": [
+        "Nuch",
+        "Hadoop"
+      ],
+      "image": "images/default-avatar.jpg",
+      "featured": false,
+      "id": 4
+    },
+    {
+      "id": 5,
+      "name": "Demo2",
+      "email": "demo2@cloudera.com",
+      "website": "http://monsite.com/",
+      "projects": [
+        "Nuch",
+        "Hadoop"
+      ],
+      "image": "images/default-avatar.jpg",
+      "featured": false
+    },
+    {
+      "id": 6,
+      "name": "Demo3",
+      "email": "demo3@cloudera.com",
+      "website": "http://monsite.com/",
+      "projects": [
+        "Nuch",
+        "Hadoop"
+      ],
+      "image": "images/default-avatar.jpg",
+      "featured": false
+    }
+  ],
+  "comments": []
+}

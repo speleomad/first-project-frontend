@@ -7,17 +7,20 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" routerLink="/">Home<span class="sr-only">(current)</span></a>
+        <li class="nav-item" *ngIf="isAuth">
+          <a class="nav-link" routerLink="/">Home<span class="sr-only" outerLinkActive="active">(current)</span></a>
+        </li>
+        <li class="nav-item"  *ngIf="isAuth">
+          <a class="nav-link" routerLink="/about"  outerLinkActive="active" >About</a>
+        </li>
+        <li class="nav-item"  *ngIf="isAuth">
+          <a class="nav-link" routerLink="/contacts"  outerLinkActive="active">Contacts</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/about">About</a>
+          <a class="nav-link"  *ngIf="!isAuth" routerLink="/signin"  outerLinkActive="active">Signin</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/contacts">Contacts</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/signin">Signin</a>
+          <a class="nav-link"  *ngIf="isAuth" routerLink="/signin"  outerLinkActive="active">Signout</a>
         </li>
       </ul>
     </div>
