@@ -14,6 +14,9 @@ import { SigninComponent } from './signin/signin.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { ContactDetailComponent } from './contact-detail/contact-detail.component';
 import { EditContactComponent } from './edit-contact/edit-contact.component';
+import { BaseURL } from './shared/baseurl';
+import { ContactService } from './services/contact.service';
+import { AboutService } from './services/about.service';
 
 
 @NgModule({
@@ -35,7 +38,11 @@ import { EditContactComponent } from './edit-contact/edit-contact.component';
     FormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [ContactService,
+    AboutService,
+    {
+      provide: 'BaseURL', useValue: BaseURL
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

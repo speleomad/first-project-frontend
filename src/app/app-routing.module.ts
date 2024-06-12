@@ -14,7 +14,7 @@ const routes: Routes = [
   { path: '',canActivate:[authGuard], component: HomeComponent,pathMatch:'full' },
   { path: 'about',canActivate:[authGuard], component: AboutComponent },
   { path: 'contacts',canActivate:[authGuard], component: ContactsComponent },
-  { path: 'contacts/edit',canActivate:[authGuard], component:EditContactComponent },
+  { path: 'contacts/edit/:id',canActivate:[authGuard], component:EditContactComponent },
   { path: 'contacts/:id',canActivate:[authGuard], component: ContactDetailComponent },
   { path: 'signin', component: SigninComponent },
   { path: '**', component: NotFoundComponent }

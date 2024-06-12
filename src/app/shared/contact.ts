@@ -1,12 +1,12 @@
 export class Contact {
-    id: number;
+    id: any;
     name: string;
     email: string;
     website: string;
     projects: string[];
     image: string;
     featured: boolean;
-    constructor(id: number, name: string, email: string, website: string, 
+    constructor(id: any, name: string, email: string, website: string, 
                 projects: string[], image: string, featured: boolean){
                     this.id=id;
                     this.name=name;

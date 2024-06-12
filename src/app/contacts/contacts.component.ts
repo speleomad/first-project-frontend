@@ -11,20 +11,33 @@ import { Contact } from '../shared/contact';
   styleUrls: ['./contacts.component.css']
 })
 export class ContactsComponent implements OnInit{
-  contacts:Contact[]=[]
+  contacts!:Contact[]
+  errMsg!:string
+  isWaiting:boolean=true;
+  isWaitingDelete:boolean=false;
   constructor(private router:Router,private contactService:ContactService){}
   ngOnInit(): void {
   // this.contacts=this.contactService.getContacts();
    //Observer
   this.contactService.getContacts().subscribe(
     {
-      next:(contacts:Contact[])=>{this.contacts=contacts}
+      next:(contacts:Contact[])=>{this.contacts=contacts;this.isWaiting=false; this.errMsg=""},
+      error:(err)=>{this.contacts=[],this.isWaiting=false; this.errMsg=err}
     }
   )
   }
   onDelete(id:number){
-    
-    this.contactService.deleteContactById(id);
+    this.isWaitingDelete=true
+    this.contactService.deleteContactById(id).subscribe(
+      {
+        next:(res:any)=>{  
+          this.isWaitingDelete=false
+          let index = this.contacts.findIndex(contact => contact.id === id);
+          if (index != -1) {
+            this.contacts.splice(index, 1);
+          }}
+      }
+    );
 
   }
   onAbout(){
@@ -33,6 +46,6 @@ export class ContactsComponent implements OnInit{
   //this.router.navigateByUrl('/about?name=demo');
   }
   onAddContact(){
-    this.router.navigateByUrl('/contacts/edit')
+    this.router.navigateByUrl('/contacts/edit/-1')
   }
 }

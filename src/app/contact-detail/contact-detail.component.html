@@ -4,7 +4,7 @@
         <div *ngIf="contact ; else noContacts">
             <h3>Contact detail</h3>
             <div class="card" style="width: 25em;">
-                <img src="{{contact.image}}" class="card-img-top" alt="...">
+                <img src="{{baseURL+contact.image}}" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">{{contact.name}}</h5>
                 </div>
