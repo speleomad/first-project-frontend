@@ -32,7 +32,7 @@ export class ContactDetailComponent implements OnInit {
 
   }
 
-  goToContacts() {
+  onContacts() {
     this.router.navigateByUrl("/contacts")
   }
 

@@ -4,9 +4,10 @@
         <div *ngIf="contact ; else noContacts">
             <h3>Contact detail</h3>
             <div class="card" style="width: 25em;">
-                <img src="{{baseURL+contact.image}}" class="card-img-top" alt="...">
+                <img [src]="contact.image?baseURL+'storage/files/'+contact.image:'../../assets/images/default-avatar.jpg'" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">{{contact.name}}</h5>
+                  
                 </div>
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item"><strong>Projects :</strong> {{contact.projects}}.</li>
@@ -16,10 +17,10 @@
             </div>
         </div>
         <ng-template #noContacts>
-            <p class="alert alert-warning">Contact not found!</p>
+            <p>Contact not found</p>
         </ng-template>
     </div>
 </div>
-<button class="btn btn-primary" (click)="goToContacts()">
+<button class="btn btn-primary" (click)="onContacts()">
     Go to Contacts
 </button>

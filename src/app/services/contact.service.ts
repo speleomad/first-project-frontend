@@ -50,7 +50,7 @@ export class ContactService {
       this.contacts.push(contact);
   } */
       addContact(contact:Contact):Observable<Contact>{ 
-       return this.httpClient.post<Contact>(this.baseURL+'contacts/',contact,this.httpOptions)
+       return this.httpClient.post<Contact>(this.baseURL+'contacts',contact,this.httpOptions)
       }
 
       updateContact(contact:Contact):Observable<Contact>{ 

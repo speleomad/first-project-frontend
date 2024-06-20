@@ -2,58 +2,82 @@
     <div class="card-header bg-primary text-white "> Edit Contact Component</div>
 
     <div class="card-body">
-        <h3 *ngIf="!contact.id; else update">Add Contact</h3>   
-        <ng-template #update><h3>Update Contact</h3></ng-template> 
-        <form  (ngSubmit)="onSubmit()" #form="ngForm">    
+        <h3 *ngIf="!contact.id;else update">Add Contact</h3>
+        <ng-template #update>
+            <h3>Update Contact</h3>
+        </ng-template>
+        <!--<form  (ngSubmit)="onAddContact(form)" #form="ngForm">-->
+
+        <form (ngSubmit)="onSubmit()" #form="ngForm">
             <div class="form-group">
                 <label for="name">Name</label>
-                <input type="text" class="form-control" name="name" 
-                      [ngClass]="{'is-invalid':name.invalid && name.dirty,'is-valid':name.valid}"
-                      required 
-                      #name="ngModel" 
-                      [(ngModel)]="contact.name">
+                <input type="text" class="form-control" name="name" required [(ngModel)]="contact.name" #name="ngModel"
+                    [ngClass]="{'is-invalid':name.invalid && name.dirty,'is-valid':name.valid}">
+
                 <div *ngIf="name.invalid && name.dirty" class="invalid-feedback">
-                        Please provide a name.
-                </div>     
+                    Please provide a name.
+                </div>
             </div>
             <div class="form-row">
                 <div class="col">
                     <label for="email">Email</label>
-                    <input type="email" class="form-control" name="email"
-                    [ngClass]="{'is-invalid':email.invalid && email.dirty,'is-valid':email.valid}"
-                     required
-                     pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
-                     #email="ngModel" [(ngModel)]="contact.email">
-                     <div *ngIf="email.invalid && email.dirty" class="invalid-feedback">
-                        Please provide a valid email address.
-                     </div>
+                    <input type="email" class="form-control" name="email" required [(ngModel)]="contact.email"
+                        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" #email="ngModel"
+                        [ngClass]="{'is-invalid':(email.invalid && email.dirty)||(errMail.length!=0) ,'is-valid':email.valid}">
+                    <div *ngIf="email.invalid && email.dirty" class="invalid-feedback">
+                        Please provide a valid email.
+                    </div>
+                    <div *ngIf="errMail.length!=0" class="invalid-feedback">
+                        Email already in use 
+                    </div>
                 </div>
                 <div class="col">
-                    <label for="website">Website</label>
-                    <input type="text" class="form-control" name="website"
-                    [ngClass]="{'is-invalid':website.invalid && website.dirty,'is-valid':website.valid}"
-                     required
-                     pattern="https?://.+"
-                     #website="ngModel" 
-                     [(ngModel)]="contact.website">
-                     <div *ngIf="website.invalid && website.dirty" class="invalid-feedback">
-                        Please provide a valid URL(http://.....).
-                     </div>
+                    <label for="email">Website</label>
+                    <input type="text" class="form-control" name="website" required [(ngModel)]="contact.website"
+                        pattern="https?://.+" #website="ngModel"
+                        [ngClass]="{'is-invalid':website.invalid && website.dirty,'is-valid':website.valid}">
+                    <div *ngIf="website.invalid && website.dirty" class="invalid-feedback">
+                        Please provide a valid URL (http://...).
+                    </div>
                 </div>
             </div>
             <div class="form-group">
                 <label for="projects">Projects (separated with comma",")</label>
-                <input type="text" class="form-control" name="projects" 
-                [ngClass]="{'is-invalid':projects.invalid && projects.dirty,'is-valid':projects.valid}"
-                required 
-                #projects="ngModel" 
-                [(ngModel)]="contact.projects">
+                <input type="text" class="form-control" name="projects" required [(ngModel)]="projectsContact"
+                    #projects="ngModel"
+                    [ngClass]="{'is-invalid':projects.invalid && projects.dirty,'is-valid':projects.valid}">
                 <div *ngIf="projects.invalid && projects.dirty" class="invalid-feedback">
-                   Please provide a project.
+                    Please provide a project.
                 </div>
             </div>
-
-            <button type="submit" class="btn btn-primary" [disabled]="form.invalid"> Save </button>
+            <div class="form-group">
+                <!-- Display the contact's image if the contact has an id (update use case). Use a default avatar if no image is available. -->
+                <img *ngIf="contact.id"
+                    [src]="contact.image ? baseUrl + 'storage/files/' + contact.image : '../../assets/images/default-avatar.jpg'"
+                    class="img-responsive img-rounded" style="max-height: 50px; max-width: 50px;" alt="photo">
+                
+                <!-- File input for selecting a new image, styled as a button. -->
+                <label class="btn btn-success p-0">
+                    <input type="file" (change)="selectFile($event)" />
+                </label>
+                
+                <!-- Display a progress bar when a file is being uploaded. -->
+                <div *ngIf="currentFile" class="progress my-3">
+                    <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar"
+                        attr.aria-valuenow="{{ progress }}" aria-valuemin="0" aria-valuemax="100"
+                        [ngStyle]="{ width: progress + '%' }">
+                        {{ progress }}%
+                    </div>
+                </div>
+                
+                <!-- Display a message if there is one, for example, success or error messages. -->
+                <div *ngIf="message" class="alert alert-secondary" role="alert">{{ message }}</div>
+            </div>
+            
+            <button type="submit" class="btn btn-primary" [disabled]="form.invalid || isLoading ">
+                <span *ngIf="isLoading" class="spinner-border" role="status"> 
+                </span> Save 
+            </button>
         </form>
     </div>
 </div>
