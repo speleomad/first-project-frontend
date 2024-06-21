@@ -6,7 +6,6 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class FileUploadService {
-
   constructor(private http: HttpClient,
     @Inject('BaseURL') private baseUrl: string) { }
    
@@ -21,7 +20,8 @@ export class FileUploadService {
       formData,
       {
         reportProgress: true,  // Enable progress events for the request
-        responseType: 'json'  // Expect a JSON response from the server
+        responseType: 'json',  // Expect a JSON response from the server
+        withCredentials: true 
       });
 
     return this.http.request(req);

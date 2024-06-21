@@ -9,53 +9,39 @@ import { ProcessHttpmsgService } from './process-httpmsg.service';
   providedIn: 'root'
 })
 export class ContactService {
-
-  contacts: Contact[] = CONTACTS;
+  contacts: Contact[] = CONTACTS
   httpOptions={
-    headers:new HttpHeaders({'content-type':'application/json'})
+    headers:new HttpHeaders({'Content-Type':'application/json'}),
+    withCredentials: true
+  };
+  constructor(private http: HttpClient,  @Inject('BaseURL')private baseUrl:string,
+              private processHTTPMsgService : ProcessHttpmsgService ) { }
+ 
+  getContacts(): Observable<Contact[]> {
+    //return this.contacts;
+  return  this.http.get<Contact[]>(this.baseUrl+"contacts",{ withCredentials: true})
+                  .pipe(catchError(this.processHTTPMsgService.handleError));
+            
   }
 
-  constructor( private httpClient: HttpClient,
-               @Inject('BaseURL') private baseURL:any,
-               private processHttpmsgService:ProcessHttpmsgService
-              ) { }
+  getContactById(id: number): Observable<Contact> {
+   // return this.contacts.find(contact => contact.id == id);
+   return this.http.get<Contact>(this.baseUrl+"contacts/"+id,{ withCredentials: true});
+  }
+  deleteContactById(id: number): Observable<void> {
+     return this.http.delete<void>(this.baseUrl+"contacts/"+id,{ withCredentials: true});
 
- /* getContacts(): Contact[] {
-    return this.contacts;
-  }*/
-    getContacts(): Observable<Contact[]> {
-      return this.httpClient.get<Contact[]>(this.baseURL+"contacts").pipe(
-          catchError(this.processHttpmsgService.handleError)
-      ) ;
-    }
-
-/*   getContactById(id: number): Contact | undefined {
-    return this.contacts.find(contact => contact.id == id);
-  } */
-    getContactById(id: number): Observable<Contact> {
-      return this.httpClient.get<Contact>(this.baseURL+"contacts/"+id);
-    }
-/*   deleteContactById(id: number): void {
-    let index = this.contacts.findIndex(contact => contact.id === id);
-    if (index != -1) {
-      this.contacts.splice(index, 1);
-    }
-  } */
-    deleteContactById(id: number): Observable<any> {
-      return this.httpClient.delete<any>(this.baseURL+"contacts/"+id)
-    } 
-
-/*   addContact(contact:Contact){
-      contact.id=this.contacts[(this.contacts.length-1)].id+1
-      this.contacts.push(contact);
-  } */
-      addContact(contact:Contact):Observable<Contact>{ 
-       return this.httpClient.post<Contact>(this.baseURL+'contacts',contact,this.httpOptions)
-      }
-
-      updateContact(contact:Contact):Observable<Contact>{ 
-        return this.httpClient.put<Contact>(this.baseURL+'contacts/'+contact.id,contact,this.httpOptions)
-       }
- 
-
+   /* let index = this.contacts.findIndex(contact => contact.id == id)
+    this.contacts.splice(index, 1);*/
+  }
+  addContact(contact: Contact): Observable<Contact> {
+  /*  contact.id = this.contacts[this.contacts.length - 1].id + 1;
+    this.contacts.push(contact);*/
+   
+    return this.http.post<Contact>(this.baseUrl+"contacts",contact,this.httpOptions);
+  }
+  updateContact(contact: Contact):Observable<Contact>{
+    return this.http.put<Contact>(this.baseUrl+"contacts/"+contact.id,contact,this.httpOptions)
+  }
 }
+

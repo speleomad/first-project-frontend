@@ -5,8 +5,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AboutComponent } from './about/about.component';
 import { ContactsComponent } from './contacts/contacts.component';
-import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { GetCharPipe } from './pipes/get-char.pipe';
 import { CommentComponent } from './comment/comment.component';
 import { HomeComponent } from './home/home.component';
@@ -17,6 +17,9 @@ import { EditContactComponent } from './edit-contact/edit-contact.component';
 import { BaseURL } from './shared/baseurl';
 import { ContactService } from './services/contact.service';
 import { AboutService } from './services/about.service';
+import { SignupComponent } from './signup/signup.component';
+import { AdminComponent } from './admin/admin.component';
+import { HttpInterceptor } from './services/http.interceptor';
 
 
 @NgModule({
@@ -30,19 +33,22 @@ import { AboutService } from './services/about.service';
     SigninComponent,
     NotFoundComponent,
     ContactDetailComponent,
-    EditContactComponent
+    EditContactComponent,
+    SignupComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [ContactService,
-    AboutService,
-    {
-      provide: 'BaseURL', useValue: BaseURL
-    }],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: HttpInterceptor, multi: true },
+    { provide: 'BaseURL', useValue: BaseURL}
+ ],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }

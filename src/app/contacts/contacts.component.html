@@ -1,4 +1,4 @@
-<button class="btn btn-info" (click)="onAddContact()">
+<button *ngIf="showAdminFn"class="btn btn-info" (click)="onAddContact()">
     Add Contact
 </button>
 <div class="card border-primary mt-3">
@@ -17,11 +17,12 @@
                 <tbody>
                     <tr *ngFor="let contact of contacts">
                         <td>{{contact.name}}</td>
-                        <td><a routerLink="/contacts/{{contact.id}}" class="btn btn-success">Detail</a></td>
-                        <td><a routerLink="/contacts/edit/{{contact.id}}" class="btn btn-warning">Edit</a></td>
-                        <td><button class="btn btn-danger" (click)="onDelete(contact.id)" [disabled]="isWaitingDelete">
+                        <td><a routerLink="/contacts/{{contact.id}}"  class="btn btn-success">Detail</a></td>
+                        <td><a routerLink="/contacts/edit/{{contact.id}}" *ngIf="showAdminFn" class="btn btn-warning">Edit</a></td>
+                        <td><button class="btn btn-danger" (click)="onDelete(contact.id)" *ngIf="showAdminFn" [disabled]="isWaitingDelete">
                               Delete
-                            </button></td>
+                            </button>
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -48,8 +49,6 @@
     </div>
 
 </div>
-
-
 <button class="btn btn-primary mt-5" (click)="onAbout()">
     Go to about
 </button>
